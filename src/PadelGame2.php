@@ -162,21 +162,7 @@ class PadelGame2 implements PadelGame
     private function isDeuce(): bool
     {
         return $this->scorePlayer1 === $this->scorePlayer2 && $this->scorePlayer1 >= 3;
-    }
-
-    private function SetP1Score(int $number): void
-    {
-        for ($i = 0; $i < $number; $i++) {
-            $this->p1Sc();
-        }
-    }
-
-    private function SetP2Score(int $number): void
-    {
-        for ($i = 0; $i < $number; $i++) {
-            $this->P2Score();
-        }
-    }
+    }    
 
     private function p1Sc(): void
     {
