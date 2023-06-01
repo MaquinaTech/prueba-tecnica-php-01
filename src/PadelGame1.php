@@ -36,7 +36,7 @@ class PadelGame1 implements PadelGame
 
     public function getScore(): string
     {
-        
+        //Score
         $sc = '';
 
         //If the score is equal
@@ -46,29 +46,11 @@ class PadelGame1 implements PadelGame
             //If the score is greater than 4
             $sc = $this->handleAdvantageAndWin();
         } else {
-            for ($i = 1; $i < 3; $i++) {
-                if ($i === 1) {
-                    $temp = $this->scorePlayer1;
-                } else {
-                    $sc .= '-';
-                    $temp = $this->scorePlayer2;
-                }
-                switch ($temp) {
-                    case 0:
-                        $sc .= 'Love';
-                        break;
-                    case 1:
-                        $sc .= 'Fifteen';
-                        break;
-                    case 2:
-                        $sc .= 'Thirty';
-                        break;
-                    case 3:
-                        $sc .= 'Forty';
-                        break;
-                }
-            }
+            //If the score is normal
+            $sc = $this->handleNormalScore();
         }
+        
+        //Return the score
         return $sc;
     }
 
@@ -103,5 +85,18 @@ class PadelGame1 implements PadelGame
 
         $leadingPlayer = ($scoreDifference > 0) ? $this->player1 : $this->player2;
         return 'Win for ' . $leadingPlayer;
+    }
+
+    /**
+     * Function to handle the normal score
+     * @return string
+     */
+    private function handleNormalScore(): string
+    {
+        $scoreDescriptions = ['Love', 'Fifteen', 'Thirty', 'Forty'];
+        $scorePlayer1 = $scoreDescriptions[$this->scorePlayer1];
+        $scorePlayer2 = $scoreDescriptions[$this->scorePlayer2];
+        
+        return $scorePlayer1 . '-' . $scorePlayer2;
     }
 }
