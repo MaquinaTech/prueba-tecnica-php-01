@@ -109,14 +109,4 @@ class PadelGame2 implements PadelGame
     {
         return ($this->scorePlayer1 > $this->scorePlayer2 && $this->scorePlayer1 >= 4) || ($this->scorePlayer2 > $this->scorePlayer1 && $this->scorePlayer2 >= 4);
     }
-
-    private function p1Sc(): void
-    {
-        $this->scorePlayer1++;
-    }
-
-    private function scorePlayer2(): void
-    {
-        $this->scorePlayer2++;
-    }
 }
