@@ -6,14 +6,23 @@ namespace Sivsa\PadelGame;
 
 class PadelGame1 implements PadelGame
 {
+    //Score of the players
     private int $scorePlayer1 = 0;
-
     private int $scorePlayer2 = 0;
 
-    public function __construct(
-        private string $p1,
-        private string $p2
-    ) {
+    //Names of the players
+    private string $player1;
+    private string $player2;
+
+    /**
+     * PadelGame1 constructor.
+     * @param string $player1
+     * @param string $player2
+     */
+    public function __construct(string $player1, string $player2)
+    {
+        $this->player1 = $player1;
+        $this->player2 = $player2;
     }
 
     public function wonPoint(string $playerName): void
