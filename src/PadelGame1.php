@@ -43,16 +43,8 @@ class PadelGame1 implements PadelGame
         if ($this->scorePlayer1 === $this->scorePlayer2) {
             $sc = $this->handleTie();
         } elseif ($this->scorePlayer1 >= 4 || $this->scorePlayer2 >= 4) {
-            $minor = $this->scorePlayer1 - $this->scorePlayer2;
-            if ($minor == 1) {
-                $sc = 'Advantage player1';
-            } elseif ($minor == -1) {
-                $sc = 'Advantage player2';
-            } elseif ($minor >= 2) {
-                $sc = 'Win for player1';
-            } else {
-                $sc = 'Win for player2';
-            }
+            //If the score is greater than 4
+            $sc = $this->handleAdvantageAndWin();
         } else {
             for ($i = 1; $i < 3; $i++) {
                 if ($i === 1) {
@@ -94,5 +86,22 @@ class PadelGame1 implements PadelGame
         }
 
         return $scoreDescriptions[$score] . '-All';
+    }
+
+    /**
+     * Function to handle the advantage and win
+     * @return string
+     */
+    private function handleAdvantageAndWin(): string
+    {
+        $scoreDifference = $this->scorePlayer1 - $this->scorePlayer2;
+        
+        if (abs($scoreDifference) === 1) {
+            $leadingPlayer = ($scoreDifference > 0) ? $this->player1 : $this->player2;
+            return 'Advantage ' . $leadingPlayer;
+        }
+
+        $leadingPlayer = ($scoreDifference > 0) ? $this->player1 : $this->player2;
+        return 'Win for ' . $leadingPlayer;
     }
 }
