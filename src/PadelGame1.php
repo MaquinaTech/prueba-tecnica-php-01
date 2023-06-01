@@ -76,7 +76,7 @@ class PadelGame1 implements PadelGame
         $scoreDescriptions = ['Love', 'Fifteen', 'Thirty', 'Forty'];
         $score = $this->scorePlayer1;
         
-        if ($score >= count($scoreDescriptions)) {
+        if ($score >= count($scoreDescriptions)-1) {
             return 'Deuce';
         }
 
