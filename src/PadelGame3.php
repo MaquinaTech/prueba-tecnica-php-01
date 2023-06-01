@@ -29,12 +29,14 @@ class PadelGame3 implements PadelGame
 
     public function getScore(): string
     {
-        if ($this->scorePlayer1 < 4 && $this->scorePlayer2 < 4 && ! ($this->scorePlayer1 + $this->scorePlayer2 === 6)) {
+        //If the score is normal
+        if ($this->isNormalScore()) {
             $p = ['Love', 'Fifteen', 'Thirty', 'Forty'];
             $s = $p[$this->scorePlayer1];
             return ($this->scorePlayer1 === $this->scorePlayer2) ? "{$s}-All" : "{$s}-{$p[$this->scorePlayer2]}";
         }
-        if ($this->scorePlayer1 === $this->scorePlayer2) {
+        //If the score is a tie
+        if ($this->isDeuce()) {
             return 'Deuce';
         }
         $s = $this->scorePlayer1 > $this->scorePlayer2 ? $this->player1 : $this->player2;
@@ -48,5 +50,23 @@ class PadelGame3 implements PadelGame
         } else {
             $this->scorePlayer2++;
         }
+    }
+
+    /**
+     * Function to check if the score is normal
+     * @returns bool
+     */
+    private function isNormalScore(): bool
+    {
+        return $this->scorePlayer1 < 4 && $this->scorePlayer2 < 4 && ! ($this->scorePlayer1 + $this->scorePlayer2 === 6);
+    }
+
+    /**
+     * Function to check if the score is a deuce
+     * @returns bool
+     */
+    private function isDeuce(): bool
+    {
+        return $this->scorePlayer1 === $this->scorePlayer2;
     }
 }
