@@ -20,7 +20,10 @@ class PadelGame1 implements PadelGame
 
     private string $player2;
 
-    //Score descriptions
+    /**
+     * Score descriptions
+     * @var string[]
+     */
     private array $scoreDescriptions = ['Love', 'Fifteen', 'Thirty', 'Forty', 'Deuce'];
 
     /**
