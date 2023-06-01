@@ -6,9 +6,9 @@ namespace Sivsa\PadelGame;
 
 class PadelGame1 implements PadelGame
 {
-    private int $sc1 = 0;
+    private int $scorePlayer1 = 0;
 
-    private int $sc2 = 0;
+    private int $scorePlayer2 = 0;
 
     public function __construct(
         private string $p1,
@@ -19,9 +19,9 @@ class PadelGame1 implements PadelGame
     public function wonPoint(string $playerName): void
     {
         if ($playerName === 'player1') {
-            $this->sc1++;
+            $this->scorePlayer1++;
         } else {
-            $this->sc2++;
+            $this->scorePlayer2++;
         }
     }
 
@@ -30,15 +30,15 @@ class PadelGame1 implements PadelGame
         
         $sc = '';
 
-        if ($this->sc1 === $this->sc2) {
-            $sc = match ($this->sc1) {
+        if ($this->scorePlayer1 === $this->scorePlayer2) {
+            $sc = match ($this->scorePlayer1) {
                 0 => 'Love-All',
                 1 => 'Fifteen-All',
                 2 => 'Thirty-All',
                 default => 'Deuce',
             };
-        } elseif ($this->sc1 >= 4 || $this->sc2 >= 4) {
-            $minor = $this->sc1 - $this->sc2;
+        } elseif ($this->scorePlayer1 >= 4 || $this->scorePlayer2 >= 4) {
+            $minor = $this->scorePlayer1 - $this->scorePlayer2;
             if ($minor == 1) {
                 $sc = 'Advantage player1';
             } elseif ($minor == -1) {
@@ -51,10 +51,10 @@ class PadelGame1 implements PadelGame
         } else {
             for ($i = 1; $i < 3; $i++) {
                 if ($i === 1) {
-                    $temp = $this->sc1;
+                    $temp = $this->scorePlayer1;
                 } else {
                     $sc .= '-';
-                    $temp = $this->sc2;
+                    $temp = $this->scorePlayer2;
                 }
                 switch ($temp) {
                     case 0:
