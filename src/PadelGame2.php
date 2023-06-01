@@ -14,10 +14,26 @@ class PadelGame2 implements PadelGame
 
     private string $resultPlayer2 = '';
 
-    public function __construct(
-        private string $p1,
-        private string $p2
-    ) {
+    //Names of the players
+    private string $player1;
+
+    private string $player2;
+
+    /**
+     * Score descriptions
+     * @var string[]
+     */
+    private array $scoreDescriptions = ['Love', 'Fifteen', 'Thirty', 'Forty', 'Deuce'];
+
+    /**
+     * PadelGame1 constructor.
+     * @parameters string $player1
+     * @parameters string $player2
+     */
+    public function __construct(string $player1, string $player2)
+    {
+        $this->player1 = $player1;
+        $this->player2 = $player2;
     }
 
     public function getScore(): string
