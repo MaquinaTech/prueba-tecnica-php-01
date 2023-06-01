@@ -47,8 +47,11 @@ class PadelGame3 implements PadelGame
         if ($this->isDeuce()) {
             return 'Deuce';
         }
-        $s = $this->scorePlayer1 > $this->scorePlayer2 ? $this->player1 : $this->player2;
-        return (($this->scorePlayer1 - $this->scorePlayer2) * ($this->scorePlayer1 - $this->scorePlayer2) === 1) ? "Advantage {$s}" : "Win for {$s}";
+        //If a player is winning or has advantage
+        $leadingPlayer = ($this->scorePlayer1 > $this->scorePlayer2) ? $this->player1 : $this->player2;
+        $scoreDifference = abs($this->scorePlayer1 - $this->scorePlayer2);
+
+        return ($scoreDifference === 1) ? "Advantage {$leadingPlayer}" : "Win for {$leadingPlayer}";
     }
 
     public function wonPoint(string $playerName): void
