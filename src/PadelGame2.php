@@ -39,7 +39,8 @@ class PadelGame2 implements PadelGame
     public function getScore(): string
     {
         $sc = '';
-        if ($this->scorePlayer1 === $this->scorePlayer2 && $this->scorePlayer1 < 4) {
+        //If the score is equals and less than 4
+        if ($this->isTie()) {
             if ($this->scorePlayer1 === 0) {
                 $sc = 'Love';
             }
@@ -51,8 +52,8 @@ class PadelGame2 implements PadelGame
             }
             $sc .= '-All';
         }
-
-        if ($this->scorePlayer1 === $this->scorePlayer2 && $this->scorePlayer1 >= 3) {
+        //If the score is equals and greater than 3
+        if ($this->isDeuce()) {
             $sc = 'Deuce';
         }
 
@@ -143,6 +144,24 @@ class PadelGame2 implements PadelGame
         } else {
             $this->P2Score();
         }
+    }
+
+    /**
+     * Function to check if the score is a tie
+     * @returns bool
+     */
+    private function isTie(): bool
+    {
+        return $this->scorePlayer1 === $this->scorePlayer2 && $this->scorePlayer1 < 4;
+    }
+
+    /**
+     * Function to check if the score is a deuce
+     * @returns bool
+     */
+    private function isDeuce(): bool
+    {
+        return $this->scorePlayer1 === $this->scorePlayer2 && $this->scorePlayer1 >= 3;
     }
 
     private function SetP1Score(int $number): void
