@@ -34,7 +34,6 @@ class PadelGame2 implements PadelGame
 
     public function getScore(): string
     {
-        $sc = '';
         //If the score is equals and less than 4
         if ($this->isTie()) {
             return $this->handleTie();
@@ -43,21 +42,23 @@ class PadelGame2 implements PadelGame
         if ($this->isDeuce()) {
             return 'Deuce';
         }
-
+        //If a player is winning
         if ($this->isPlayerWinning()) {
+            //Get the leading player
             $leadingPlayer = ($this->scorePlayer1 > $this->scorePlayer2) ? $this->player1 : $this->player2;
+            //Get the score difference
             $scoreDifference = abs($this->scorePlayer1 - $this->scorePlayer2);
-
+            //If the score difference is 1
             if ($scoreDifference === 1) {
                 return 'Advantage ' . $leadingPlayer;
             }
-
+            //If the score difference is greater than 1
             return 'Win for ' . $leadingPlayer;
         }
-
+        //If none of the above
         $p1ScoreDescription = $this->scoreDescriptions[$this->scorePlayer1];
         $p2ScoreDescription = $this->scoreDescriptions[$this->scorePlayer2];
-
+        //Return the score
         return $p1ScoreDescription . '-' . $p2ScoreDescription;
     }
 
