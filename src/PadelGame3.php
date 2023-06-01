@@ -17,6 +17,12 @@ class PadelGame3 implements PadelGame
     private string $player2;
 
     /**
+     * Score descriptions
+     * @var string[]
+     */
+    private array $scoreDescriptions = ['Love', 'Fifteen', 'Thirty', 'Forty', 'Deuce'];
+
+    /**
      * PadelGame1 constructor.
      * @parameters string $player1
      * @parameters string $player2
@@ -31,9 +37,11 @@ class PadelGame3 implements PadelGame
     {
         //If the score is normal
         if ($this->isNormalScore()) {
-            $p = ['Love', 'Fifteen', 'Thirty', 'Forty'];
-            $s = $p[$this->scorePlayer1];
-            return ($this->scorePlayer1 === $this->scorePlayer2) ? "{$s}-All" : "{$s}-{$p[$this->scorePlayer2]}";
+            //Get the score description
+            $scorePlayer1 = $this->scoreDescriptions[$this->scorePlayer1];
+            $scorePlayer2 = $this->scoreDescriptions[$this->scorePlayer2];
+
+            return ($this->scorePlayer1 === $this->scorePlayer2) ? "{$scorePlayer1}-All" : "{$scorePlayer1}-{$scorePlayer2}";
         }
         //If the score is a tie
         if ($this->isDeuce()) {
