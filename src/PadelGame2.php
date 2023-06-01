@@ -10,10 +10,6 @@ class PadelGame2 implements PadelGame
 
     private int $scorePlayer2 = 0;
 
-    private string $resultPlayer1 = '';
-
-    private string $resultPlayer2 = '';
-
     //Names of the players
     private string $player1;
 
@@ -45,87 +41,24 @@ class PadelGame2 implements PadelGame
         }
         //If the score is equals and greater than 3
         if ($this->isDeuce()) {
-            $sc = 'Deuce';
+            return 'Deuce';
         }
 
-        if ($this->scorePlayer1 > 0 && $this->scorePlayer2 === 0) {
-            if ($this->scorePlayer1 === 1) {
-                $this->resultPlayer1 = 'Fifteen';
-            }
-            if ($this->scorePlayer1 === 2) {
-                $this->resultPlayer1 = 'Thirty';
-            }
-            if ($this->scorePlayer1 === 3) {
-                $this->resultPlayer1 = 'Forty';
+        if ($this->isPlayerWinning()) {
+            $leadingPlayer = ($this->scorePlayer1 > $this->scorePlayer2) ? $this->player1 : $this->player2;
+            $scoreDifference = abs($this->scorePlayer1 - $this->scorePlayer2);
+
+            if ($scoreDifference === 1) {
+                return 'Advantage ' . $leadingPlayer;
             }
 
-            $this->resultPlayer2 = 'Love';
-            $sc = "{$this->resultPlayer1}-{$this->resultPlayer2}";
+            return 'Win for ' . $leadingPlayer;
         }
 
-        if ($this->scorePlayer2 > 0 && $this->scorePlayer1 === 0) {
-            if ($this->scorePlayer2 === 1) {
-                $this->resultPlayer2 = 'Fifteen';
-            }
-            if ($this->scorePlayer2 === 2) {
-                $this->resultPlayer2 = 'Thirty';
-            }
-            if ($this->scorePlayer2 === 3) {
-                $this->resultPlayer2 = 'Forty';
-            }
-            $this->resultPlayer1 = 'Love';
-            $sc = "{$this->resultPlayer1}-{$this->resultPlayer2}";
-        }
+        $p1ScoreDescription = $this->scoreDescriptions[$this->scorePlayer1];
+        $p2ScoreDescription = $this->scoreDescriptions[$this->scorePlayer2];
 
-        if ($this->scorePlayer1 > $this->scorePlayer2 && $this->scorePlayer1 < 4) {
-            if ($this->scorePlayer1 === 2) {
-                $this->resultPlayer1 = 'Thirty';
-            }
-            if ($this->scorePlayer1 === 3) {
-                $this->resultPlayer1 = 'Forty';
-            }
-            if ($this->scorePlayer2 === 1) {
-                $this->resultPlayer2 = 'Fifteen';
-            }
-            if ($this->scorePlayer2 === 2) {
-                $this->resultPlayer2 = 'Thirty';
-            }
-            $sc = "{$this->resultPlayer1}-{$this->resultPlayer2}";
-        }
-
-        if ($this->scorePlayer2 > $this->scorePlayer1 && $this->scorePlayer2 < 4) {
-            if ($this->scorePlayer2 === 2) {
-                $this->resultPlayer2 = 'Thirty';
-            }
-            if ($this->scorePlayer2 === 3) {
-                $this->resultPlayer2 = 'Forty';
-            }
-            if ($this->scorePlayer1 === 1) {
-                $this->resultPlayer1 = 'Fifteen';
-            }
-            if ($this->scorePlayer1 === 2) {
-                $this->resultPlayer1 = 'Thirty';
-            }
-            $sc = "{$this->resultPlayer1}-{$this->resultPlayer2}";
-        }
-
-        if ($this->scorePlayer1 > $this->scorePlayer2 && $this->scorePlayer2 >= 3) {
-            $sc = 'Advantage player1';
-        }
-
-        if ($this->scorePlayer2 > $this->scorePlayer1 && $this->scorePlayer1 >= 3) {
-            $sc = 'Advantage player2';
-        }
-
-        if ($this->scorePlayer1 >= 4 && $this->scorePlayer2 >= 0 && ($this->scorePlayer1 - $this->scorePlayer2) >= 2) {
-            $sc = 'Win for player1';
-        }
-
-        if ($this->scorePlayer2 >= 4 && $this->scorePlayer1 >= 0 && ($this->scorePlayer2 - $this->scorePlayer1) >= 2) {
-            $sc = 'Win for player2';
-        }
-
-        return $sc;
+        return $p1ScoreDescription . '-' . $p2ScoreDescription;
     }
 
     public function wonPoint(string $player): void
@@ -133,7 +66,7 @@ class PadelGame2 implements PadelGame
         if ($player === 'player1') {
             $this->p1Sc();
         } else {
-            $this->P2Score();
+            $this->scorePlayer2();
         }
     }
 
@@ -166,14 +99,23 @@ class PadelGame2 implements PadelGame
     private function isDeuce(): bool
     {
         return $this->scorePlayer1 === $this->scorePlayer2 && $this->scorePlayer1 >= 3;
-    }    
+    }
+
+    /**
+     * Function to check if a player is winning
+     * @returns bool
+     */
+    private function isPlayerWinning(): bool
+    {
+        return ($this->scorePlayer1 > $this->scorePlayer2 && $this->scorePlayer1 >= 4) || ($this->scorePlayer2 > $this->scorePlayer1 && $this->scorePlayer2 >= 4);
+    }
 
     private function p1Sc(): void
     {
         $this->scorePlayer1++;
     }
 
-    private function P2Score(): void
+    private function scorePlayer2(): void
     {
         $this->scorePlayer2++;
     }
