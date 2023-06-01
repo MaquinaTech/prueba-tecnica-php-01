@@ -39,13 +39,9 @@ class PadelGame1 implements PadelGame
         
         $sc = '';
 
+        //If the score is equal
         if ($this->scorePlayer1 === $this->scorePlayer2) {
-            $sc = match ($this->scorePlayer1) {
-                0 => 'Love-All',
-                1 => 'Fifteen-All',
-                2 => 'Thirty-All',
-                default => 'Deuce',
-            };
+            $sc = $this->handleTie();
         } elseif ($this->scorePlayer1 >= 4 || $this->scorePlayer2 >= 4) {
             $minor = $this->scorePlayer1 - $this->scorePlayer2;
             if ($minor == 1) {
@@ -82,5 +78,21 @@ class PadelGame1 implements PadelGame
             }
         }
         return $sc;
+    }
+
+    /**
+     * Function to handle the tie
+     * @return string
+     */
+    private function handleTie(): string
+    {
+        $scoreDescriptions = ['Love', 'Fifteen', 'Thirty', 'Forty'];
+        $score = $this->scorePlayer1;
+        
+        if ($score >= count($scoreDescriptions)) {
+            return 'Deuce';
+        }
+
+        return $scoreDescriptions[$score] . '-All';
     }
 }
