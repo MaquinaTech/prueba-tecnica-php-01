@@ -54,9 +54,9 @@ class PadelGame3 implements PadelGame
         return ($scoreDifference === 1) ? "Advantage {$leadingPlayer}" : "Win for {$leadingPlayer}";
     }
 
-    public function wonPoint(string $playerName): void
+    public function wonPoint(string $player): void
     {
-        if ($playerName === 'player1') {
+        if ($player === $this->player1) {
             $this->scorePlayer1++;
         } else {
             $this->scorePlayer2++;
