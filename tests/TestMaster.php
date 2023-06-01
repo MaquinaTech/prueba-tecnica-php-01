@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Sivsa\PadelGame\Tests;
 
-use Sivsa\PadelGame\PadelGame;
 use PHPUnit\Framework\TestCase;
+use Sivsa\PadelGame\PadelGame;
 
 abstract class TestMaster extends TestCase
 {

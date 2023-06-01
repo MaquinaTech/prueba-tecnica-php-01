@@ -12,19 +12,21 @@ class PadelGame1 implements PadelGame
 {
     //Score of the players
     private int $scorePlayer1 = 0;
+
     private int $scorePlayer2 = 0;
 
     //Names of the players
     private string $player1;
+
     private string $player2;
-    
+
     //Score descriptions
-    private array $scoreDescriptions = ['Love', 'Fifteen', 'Thirty', 'Forty','Deuce'];
+    private array $scoreDescriptions = ['Love', 'Fifteen', 'Thirty', 'Forty', 'Deuce'];
 
     /**
      * PadelGame1 constructor.
-     * @param string $player1
-     * @param string $player2
+     * @parameters string $player1
+     * @parameters string $player2
      */
     public function __construct(string $player1, string $player2)
     {
@@ -34,8 +36,8 @@ class PadelGame1 implements PadelGame
 
     /**
      * Function to add a point to a player
-     * @param string $playerName
-     * @return void
+     * @parameters string $playerName
+     * @returns void
      */
     public function wonPoint(string $playerName): void
     {
@@ -48,7 +50,7 @@ class PadelGame1 implements PadelGame
 
     /**
      * Function to get the score
-     * @return string
+     * @returns string
      */
     public function getScore(): string
     {
@@ -72,13 +74,13 @@ class PadelGame1 implements PadelGame
 
     /**
      * Function to handle the tie
-     * @return string
+     * @returns string
      */
     private function handleTie(): string
     {
         $score = $this->scorePlayer1;
-        
-        if ($score >= count($this->scoreDescriptions)-2) {
+
+        if ($score >= count($this->scoreDescriptions) - 2) {
             //Return Deuce
             return $this->scoreDescriptions[4];
         }
@@ -88,12 +90,12 @@ class PadelGame1 implements PadelGame
 
     /**
      * Function to handle the advantage and win
-     * @return string
+     * @returns string
      */
     private function handleAdvantageAndWin(): string
     {
         $scoreDifference = $this->scorePlayer1 - $this->scorePlayer2;
-        
+
         if (abs($scoreDifference) === 1) {
             $leadingPlayer = ($scoreDifference > 0) ? $this->player1 : $this->player2;
             return 'Advantage ' . $leadingPlayer;
@@ -105,13 +107,13 @@ class PadelGame1 implements PadelGame
 
     /**
      * Function to handle the normal score
-     * @return string
+     * @returns string
      */
     private function handleNormalScore(): string
     {
         $scorePlayer1 = $this->scoreDescriptions[$this->scorePlayer1];
         $scorePlayer2 = $this->scoreDescriptions[$this->scorePlayer2];
-        
+
         return $scorePlayer1 . '-' . $scorePlayer2;
     }
 }
