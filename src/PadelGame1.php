@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Sivsa\PadelGame;
 
+/**
+ * Class PadelGame1
+ * @package Sivsa\PadelGame
+ */
 class PadelGame1 implements PadelGame
 {
     //Score of the players
@@ -25,6 +29,11 @@ class PadelGame1 implements PadelGame
         $this->player2 = $player2;
     }
 
+    /**
+     * Function to add a point to a player
+     * @param string $playerName
+     * @return void
+     */
     public function wonPoint(string $playerName): void
     {
         if ($playerName === 'player1') {
@@ -34,6 +43,10 @@ class PadelGame1 implements PadelGame
         }
     }
 
+    /**
+     * Function to get the score
+     * @return string
+     */
     public function getScore(): string
     {
         //Score
@@ -49,7 +62,7 @@ class PadelGame1 implements PadelGame
             //If the score is normal
             $sc = $this->handleNormalScore();
         }
-        
+
         //Return the score
         return $sc;
     }
