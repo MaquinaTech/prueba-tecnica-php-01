@@ -36,7 +36,7 @@ class PadelGame1 implements PadelGame
      */
     public function wonPoint(string $playerName): void
     {
-        if ($playerName === 'player1') {
+        if ($playerName === $this->player1) {
             $this->scorePlayer1++;
         } else {
             $this->scorePlayer2++;
