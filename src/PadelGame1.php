@@ -17,6 +17,9 @@ class PadelGame1 implements PadelGame
     //Names of the players
     private string $player1;
     private string $player2;
+    
+    //Score descriptions
+    private array $scoreDescriptions = ['Love', 'Fifteen', 'Thirty', 'Forty','Deuce'];
 
     /**
      * PadelGame1 constructor.
@@ -50,21 +53,21 @@ class PadelGame1 implements PadelGame
     public function getScore(): string
     {
         //Score
-        $sc = '';
+        $score = '';
 
         //If the score is equal
         if ($this->scorePlayer1 === $this->scorePlayer2) {
-            $sc = $this->handleTie();
+            $score = $this->handleTie();
         } elseif ($this->scorePlayer1 >= 4 || $this->scorePlayer2 >= 4) {
             //If the score is greater than 4
-            $sc = $this->handleAdvantageAndWin();
+            $score = $this->handleAdvantageAndWin();
         } else {
             //If the score is normal
-            $sc = $this->handleNormalScore();
+            $score = $this->handleNormalScore();
         }
 
         //Return the score
-        return $sc;
+        return $score;
     }
 
     /**
@@ -73,14 +76,14 @@ class PadelGame1 implements PadelGame
      */
     private function handleTie(): string
     {
-        $scoreDescriptions = ['Love', 'Fifteen', 'Thirty', 'Forty'];
         $score = $this->scorePlayer1;
         
-        if ($score >= count($scoreDescriptions)-1) {
-            return 'Deuce';
+        if ($score >= count($this->scoreDescriptions)-2) {
+            //Return Deuce
+            return $this->scoreDescriptions[4];
         }
 
-        return $scoreDescriptions[$score] . '-All';
+        return $this->scoreDescriptions[$score] . '-All';
     }
 
     /**
@@ -106,9 +109,8 @@ class PadelGame1 implements PadelGame
      */
     private function handleNormalScore(): string
     {
-        $scoreDescriptions = ['Love', 'Fifteen', 'Thirty', 'Forty'];
-        $scorePlayer1 = $scoreDescriptions[$this->scorePlayer1];
-        $scorePlayer2 = $scoreDescriptions[$this->scorePlayer2];
+        $scorePlayer1 = $this->scoreDescriptions[$this->scorePlayer1];
+        $scorePlayer2 = $this->scoreDescriptions[$this->scorePlayer2];
         
         return $scorePlayer1 . '-' . $scorePlayer2;
     }
