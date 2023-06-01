@@ -41,16 +41,7 @@ class PadelGame2 implements PadelGame
         $sc = '';
         //If the score is equals and less than 4
         if ($this->isTie()) {
-            if ($this->scorePlayer1 === 0) {
-                $sc = 'Love';
-            }
-            if ($this->scorePlayer1 === 1) {
-                $sc = 'Fifteen';
-            }
-            if ($this->scorePlayer1 === 2) {
-                $sc = 'Thirty';
-            }
-            $sc .= '-All';
+            return $this->handleTie();
         }
         //If the score is equals and greater than 3
         if ($this->isDeuce()) {
@@ -153,6 +144,19 @@ class PadelGame2 implements PadelGame
     private function isTie(): bool
     {
         return $this->scorePlayer1 === $this->scorePlayer2 && $this->scorePlayer1 < 4;
+    }
+
+    /**
+     * Function to handle the tie
+     * @returns string
+     */
+    private function handleTie(): string
+    {
+        if ($this->scorePlayer1 >= count($this->scoreDescriptions) - 2) {
+            return 'Deuce';
+        }
+
+        return $this->scoreDescriptions[$this->scorePlayer1] . '-All';
     }
 
     /**
