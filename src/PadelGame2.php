@@ -40,9 +40,10 @@ class PadelGame2 implements PadelGame
         }
         //If the score is equals and greater than 3
         if ($this->isDeuce()) {
-            return 'Deuce';
+            //Return Deuce
+            return $this->scoreDescriptions[4];
         }
-        //If a player is winning
+        //If a player is winning or has advantage
         if ($this->isPlayerWinning()) {
             //Get the leading player
             $leadingPlayer = ($this->scorePlayer1 > $this->scorePlayer2) ? $this->player1 : $this->player2;

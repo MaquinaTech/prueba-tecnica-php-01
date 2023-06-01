@@ -45,7 +45,8 @@ class PadelGame3 implements PadelGame
         }
         //If the score is a tie
         if ($this->isDeuce()) {
-            return 'Deuce';
+            //Return Deuce
+            return $this->scoreDescriptions[4];
         }
         //If a player is winning or has advantage
         $leadingPlayer = ($this->scorePlayer1 > $this->scorePlayer2) ? $this->player1 : $this->player2;
