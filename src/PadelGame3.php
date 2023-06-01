@@ -33,6 +33,10 @@ class PadelGame3 implements PadelGame
         $this->player2 = $player2;
     }
 
+    /**
+     * Function to get the score
+     * @returns string
+     */
     public function getScore(): string
     {
         //If the score is normal
@@ -55,6 +59,10 @@ class PadelGame3 implements PadelGame
         return ($scoreDifference === 1) ? "Advantage {$leadingPlayer}" : "Win for {$leadingPlayer}";
     }
 
+    /**
+     * Function to add a point to a player
+     * @parameters string $player
+     */
     public function wonPoint(string $player): void
     {
         if ($player === $this->player1) {

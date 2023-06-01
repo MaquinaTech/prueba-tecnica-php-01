@@ -39,8 +39,7 @@ class PadelGame1 implements PadelGame
 
     /**
      * Function to add a point to a player
-     * @parameters string $playerName
-     * @returns void
+     * @parameters string $player
      */
     public function wonPoint(string $playerName): void
     {

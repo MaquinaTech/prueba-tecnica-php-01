@@ -32,6 +32,10 @@ class PadelGame2 implements PadelGame
         $this->player2 = $player2;
     }
 
+    /**
+     * Function to get the score
+     * @returns string
+     */
     public function getScore(): string
     {
         //If the score is equals and less than 4
@@ -63,6 +67,10 @@ class PadelGame2 implements PadelGame
         return $p1ScoreDescription . '-' . $p2ScoreDescription;
     }
 
+    /**
+     * Function to add a point to a player
+     * @parameters string $player
+     */
     public function wonPoint(string $player): void
     {
         if ($player === $this->player1) {
