@@ -30,6 +30,7 @@ class PadelGame1 implements PadelGame
      * PadelGame1 constructor.
      * @parameters string $player1
      * @parameters string $player2
+     * @returns void
      */
     public function __construct(string $player1, string $player2)
     {
@@ -40,6 +41,7 @@ class PadelGame1 implements PadelGame
     /**
      * Function to add a point to a player
      * @parameters string $player
+     * @returns void
      */
     public function wonPoint(string $playerName): void
     {
